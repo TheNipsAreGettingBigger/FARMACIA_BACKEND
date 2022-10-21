@@ -14,6 +14,13 @@ export class LaboratoryEntity extends BaseEntity{
   @Column()
   name !: string
 
+  @Column()
+  lng !: string
+
+  @Column()
+  lat !: string
+  
+
   @OneToMany(()=>ProductEntity,(product)=>product.laboratory)
   products!:ProductEntity[]
 }

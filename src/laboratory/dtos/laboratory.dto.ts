@@ -10,4 +10,10 @@ export class LaboratoryDTO extends BaseDTO {
 
   @IsNotEmpty()
   description!: string;
+
+  @IsNotEmpty()
+  lng !: string
+
+  @IsNotEmpty()
+  lat !: string
 }

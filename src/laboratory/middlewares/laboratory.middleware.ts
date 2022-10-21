@@ -8,11 +8,13 @@ export class LaboratoryMiddleware extends SharedMiddleware {
     super();
   }
   laboraryValidator(req: Request, res: Response, next: NextFunction) {
-    const { address, description, name } = req.body;
+    const { address, description, name,lat,lng } = req.body;
     const valid = new LaboratoryDTO();
     valid.name = name;
     valid.address = address;
     valid.description = description;
+    valid.lat = lat
+    valid.lng = lng
 
     validate(valid).then((err) => {
       if (err.length > 0) {

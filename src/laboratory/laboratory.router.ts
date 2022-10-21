@@ -11,6 +11,12 @@ export class LaboratoryRouter extends BaseRouter<LaboratoryController,Laboratory
       [this.middleware.validateJWT.bind(this.middleware)],
     this.controller.getLaboratories.bind(this.controller));
 
+
+    this.router.get("/laboratories/laboratory/:id",
+      [this.middleware.validateJWT.bind(this.middleware)],
+    this.controller.getLaboratoryById.bind(this.controller));
+    
+
     this.router.post("/laboratories/create",
       [
         this.middleware.validateJWT.bind(this.middleware),
