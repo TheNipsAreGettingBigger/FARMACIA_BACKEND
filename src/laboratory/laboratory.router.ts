@@ -9,12 +9,14 @@ export class LaboratoryRouter extends BaseRouter<LaboratoryController,Laboratory
   routes(): void {
     this.router.get("/laboratories",
       [this.middleware.validateJWT.bind(this.middleware)],
-    this.controller.getLaboratories.bind(this.controller));
+      this.controller.getLaboratories.bind(this.controller)
+    );
 
 
     this.router.get("/laboratories/laboratory/:id",
       [this.middleware.validateJWT.bind(this.middleware)],
-    this.controller.getLaboratoryById.bind(this.controller));
+      this.controller.getLaboratoryById.bind(this.controller)
+    );
     
 
     this.router.post("/laboratories/create",
@@ -23,6 +25,15 @@ export class LaboratoryRouter extends BaseRouter<LaboratoryController,Laboratory
         this.middleware.isAdminRole.bind(this.middleware),
         this.middleware.laboraryValidator.bind(this.middleware)
       ],
-    this.controller.createLaboratory.bind(this.controller));
+      this.controller.createLaboratory.bind(this.controller)
+    );
+
+    this.router.put("/laboratories/update/:id",
+      [
+        this.middleware.validateJWT.bind(this.middleware),
+        this.middleware.isAdminRole.bind(this.middleware)
+      ],
+      this.controller.updateLaboratory.bind(this.controller)
+    );
   }
 }

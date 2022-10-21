@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { UpdateResult } from "typeorm";
 import { HttpResponse } from "../../shared/response/http.response";
 import { LaboratoryService } from "../services/laboratory.service";
 
@@ -39,6 +40,25 @@ export class LaboratoryController {
       }
       return this.httpResponse.Ok(res, data);
     } catch (e) {
+      return this.httpResponse.Error(res, e);
+    }
+  }
+
+  async updateLaboratory(req: Request, res: Response) {
+    const { id } = req.params;
+    console.log(req.body)
+    try {
+      const data: UpdateResult = await this.laboratoryService.update(
+        id,
+        req.body
+      );
+      if (!data.affected) {
+        return this.httpResponse.NotFound(res, "Hay un error en actualizar");
+      }
+
+      return this.httpResponse.Ok(res, data);
+    } catch (e) {
+      console.error(e);
       return this.httpResponse.Error(res, e);
     }
   }
