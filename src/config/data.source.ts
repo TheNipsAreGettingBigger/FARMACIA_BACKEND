@@ -21,6 +21,7 @@ const Config: DataSourceOptions = {
   migrationsRun: true,
   logging: false,
   namingStrategy: new SnakeNamingStrategy(),
+  
 };
 
 export const AppDataSource: DataSource = new DataSource(Config);
