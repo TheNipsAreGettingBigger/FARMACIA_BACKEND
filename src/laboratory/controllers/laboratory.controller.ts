@@ -46,7 +46,6 @@ export class LaboratoryController {
 
   async updateLaboratory(req: Request, res: Response) {
     const { id } = req.params;
-    console.log(req.body)
     try {
       const data: UpdateResult = await this.laboratoryService.update(
         id,

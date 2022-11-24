@@ -95,7 +95,6 @@ export class PurchaseController {
       }
       
       const productsResponse = await Promise.all(productsPromise)
-      console.log(productsResponse)
       
       for (const productArr of productsResponse) {
         if(!(productArr as any).length) throw new Error("Error al encontrar un producto")
@@ -117,7 +116,6 @@ export class PurchaseController {
         employee
       } as PurchaseEntity)
 
-      console.log(productsResponse)
       // crear puchases detail
       const purchaseDetail = []
       for (const product of productsResponse) {

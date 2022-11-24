@@ -12,18 +12,19 @@ import { ProductRouter } from './product/product.router';
 import { LaboratoryRouter } from './laboratory/laboratory.router';
 import { PurchaseRouter } from './purchase/purchase.router';
 
-class ServerBootstrap extends ConfigServer{
-  #app :Application
+export class ServerBootstrap extends ConfigServer{
+  app :Application
   #server : http.Server
   #port : number
   constructor(){
     super()
     this.#port = this.getNumberEnv("PORT")
-    this.#app = express()
-    this.#server = createServer(this.#app)
-    this.dbConnect()
-    this.#config()
-    this.listen()
+    this.app = express()
+    this.#server = createServer(this.app)
+    // this.config()
+
+    // this.dbConnect()
+    // this.listen()
   }
 
   // https://gist.github.com/ThomRoman/1e77b8b5b70747a91bf1a6c9058587d9
@@ -35,10 +36,10 @@ class ServerBootstrap extends ConfigServer{
         return callback(new Error('Not allowed by CORS'))
       }
     }
-    this.#app.use(express.json())
-    this.#app.use(express.urlencoded({extended : true}))
-    this.#app.use(morgan("dev"))
-    this.#app.use(cors({
+    this.app.use(express.json())
+    this.app.use(express.urlencoded({extended : true}))
+    this.app.use(morgan("dev"))
+    this.app.use(cors({
       origin: true,
       // ...corsOptions,
       // methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
@@ -54,14 +55,14 @@ class ServerBootstrap extends ConfigServer{
       new PurchaseRouter().router
     ]
   }
-  #config = () => {
+  config = () => {
     this.#middlewares()
-    this.#app.use("/api",this.#routers())
+    this.app.use("/api",this.#routers())
   }
 
   async dbConnect():Promise<DataSource | void>{
     return this.initConnect.then(() => {
-      console.log("Connect Success");
+      console.log("DB Connect Success");
     })
     .catch((err) => {
       console.error(err);
@@ -73,6 +74,12 @@ class ServerBootstrap extends ConfigServer{
       console.log(`Server listening on port => ${this.#port} ::ENV = ${this.getEnvironment("ENV") ?? "development"}`)
     })
   }
-}
+  
 
-new ServerBootstrap()
+
+  async upServer(){
+    await this.dbConnect()
+
+    this.listen()
+  }
+}
