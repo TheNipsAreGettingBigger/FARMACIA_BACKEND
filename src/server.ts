@@ -14,13 +14,14 @@ import { PurchaseRouter } from './purchase/purchase.router';
 
 export class ServerBootstrap extends ConfigServer{
   app :Application
-  #server : http.Server
+  server : http.Server
   #port : number
+  connectionRef: DataSource
   constructor(){
     super()
     this.#port = this.getNumberEnv("PORT")
     this.app = express()
-    this.#server = createServer(this.app)
+    this.server = createServer(this.app)
     // this.config()
 
     // this.dbConnect()
@@ -61,8 +62,9 @@ export class ServerBootstrap extends ConfigServer{
   }
 
   async dbConnect():Promise<DataSource | void>{
-    return this.initConnect.then(() => {
+    return this.initConnect.then((connectionRef) => {
       console.log("DB Connect Success");
+      this.connectionRef = connectionRef
     })
     .catch((err) => {
       console.error(err);
@@ -70,7 +72,7 @@ export class ServerBootstrap extends ConfigServer{
   }
 
   listen = () => {
-    this.#server.listen(this.#port,()=>{
+    this.server.listen(this.#port,()=>{
       console.log(`Server listening on port => ${this.#port} ::ENV = ${this.getEnvironment("ENV") ?? "development"}`)
     })
   }
