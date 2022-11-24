@@ -27,7 +27,7 @@ describe("Test a la aplicacion FarmaciaBackendApp",()=>{
     expect(response.statusCode).toBe(200);
   })
 
-  test('CP08. Registrar Laboratorio', () => {
+  test('CP07. Registrar Laboratorio', () => {
 
   })
   test('CP08. Editar Laboratorio', () => {

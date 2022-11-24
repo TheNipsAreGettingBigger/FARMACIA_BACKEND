@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll --no-cache --detectOpenHandles",
+    "test:watch": "jest --watchAll --no-cache --detectOpenHandles",
+    "test:coverage": "jest --coverage --no-cache --detectOpenHandles",
     "clean": "rimraf dist/ && rimraf src/migrations",
     "start": "npm run clean && tsc && node ./dist/index.js",
     "start:dev": "npm run clean && tsc && concurrently \"tsc -w\" \"nodemon ./dist/index.js\"",
