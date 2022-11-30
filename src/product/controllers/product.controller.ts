@@ -80,10 +80,12 @@ export class ProductController {
     }
   }
   async deleteProduct(req: Request, res: Response) {
+    console.log('entre');
     const { id } = req.params;
     try {
       const data: DeleteResult = await this.productService.delete(id);
       if (!data.affected) {
+        console.log(data);
         return this.httpResponse.NotFound(res, "Hay un error en borrar");
       }
       return this.httpResponse.Ok(res, data);

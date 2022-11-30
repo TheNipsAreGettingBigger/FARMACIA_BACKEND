@@ -39,6 +39,7 @@ export class ServerBootstrap extends ConfigServer{
     }
     this.app.use(express.json())
     this.app.use(express.urlencoded({extended : true}))
+    this.app.use(morgan("dev"))
     this.app.use(cors({
       origin: true,
       // ...corsOptions,
@@ -78,7 +79,6 @@ export class ServerBootstrap extends ConfigServer{
 
 
   async upServer(){
-    this.app.use(morgan("dev"))
     await this.dbConnect()
     console.log("DB Connect Success");
     this.listen()

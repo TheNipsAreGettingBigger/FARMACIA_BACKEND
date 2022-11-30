@@ -36,7 +36,7 @@ export class ProductRouter extends BaseRouter<ProductController,ProductMiddlewar
       [this.middleware.validateJWT.bind(this.middleware),this.middleware.isAdminRole.bind(this.middleware)],
     this.controller.updateProduct.bind(this.controller));
     
-    this.router.delete("products/delete/:id",
+    this.router.delete("/products/delete/:id",
       [this.middleware.validateJWT.bind(this.middleware),this.middleware.isAdminRole.bind(this.middleware)],
     this.controller.deleteProduct.bind(this.controller));
   }
