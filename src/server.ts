@@ -39,7 +39,6 @@ export class ServerBootstrap extends ConfigServer{
     }
     this.app.use(express.json())
     this.app.use(express.urlencoded({extended : true}))
-    this.app.use(morgan("dev"))
     this.app.use(cors({
       origin: true,
       // ...corsOptions,
@@ -61,10 +60,9 @@ export class ServerBootstrap extends ConfigServer{
     this.app.use("/api",this.#routers())
   }
 
-  async dbConnect():Promise<DataSource | void>{
+  async dbConnect(){
     return this.initConnect.then((connectionRef) => {
-      console.log("DB Connect Success");
-      this.connectionRef = connectionRef
+      return Promise.resolve(connectionRef)
     })
     .catch((err) => {
       console.error(err);
@@ -80,8 +78,9 @@ export class ServerBootstrap extends ConfigServer{
 
 
   async upServer(){
+    this.app.use(morgan("dev"))
     await this.dbConnect()
-
+    console.log("DB Connect Success");
     this.listen()
   }
 }

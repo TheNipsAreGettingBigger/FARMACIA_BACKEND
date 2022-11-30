@@ -4,9 +4,7 @@ import { SnakeNamingStrategy } from "typeorm-naming-strategies";
 
 dotenv.config({
   path:
-    process.env.NODE_ENV !== undefined
-      ? `.${process.env.NODE_ENV.trim()}.env`
-      : ".env",
+    process.env.NODE_ENV !== "test"?  (process.env.NODE_ENV !== undefined ? `.env.production` : ".env") : ".env.test"
 });
 const Config: DataSourceOptions = {
   type: "mysql",
