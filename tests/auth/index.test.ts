@@ -25,5 +25,7 @@ describe('Test en la Authentication', () => {
     .expect(200);
     expect(response.body.accessToken).toBeTruthy()
     expect(typeof response.body.accessToken).toBe('string');
+    expect(response.body.ok).toBeTruthy()
+    expect(response.body.employee).not.toBeUndefined()
   })
 })

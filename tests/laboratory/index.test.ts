@@ -47,6 +47,9 @@ describe("Test al modulo laboratory", () => {
       .set("Authorization", `Bearer ${accessToken}`)
       .send();
     expect(response.statusCode).toBe(200);
+    expect(response.body.data).toBeInstanceOf(Array)
+    expect(response.body.data.length).toBeGreaterThan(0);
+    expect(response.body.statusMsg).toBe("success")
   });
 
   test("CP08-HU08  Registra Laboratorio", async () => {
@@ -55,8 +58,12 @@ describe("Test al modulo laboratory", () => {
       .post("/api/laboratories/create")
       .set("Authorization", `Bearer ${accessToken}`)
       .send(laboratory);
-    expect(response.statusCode).toBe(200);
     laboratoriId = response.body.data.id
+    expect(response.statusCode).toBe(200);
+    expect(response.body.statusMsg).toBe("success");
+    expect(response.body.data).not.toBeUndefined()
+    expect(response.body.data.name).toBe(laboratory.name)
+    
   });
 
   test("CP09-HU09  Listar laboratorios", async () => {
