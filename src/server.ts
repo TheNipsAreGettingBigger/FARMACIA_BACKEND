@@ -39,7 +39,9 @@ export class ServerBootstrap extends ConfigServer{
     }
     this.app.use(express.json())
     this.app.use(express.urlencoded({extended : true}))
-    this.app.use(morgan("dev"))
+    if(this.nodeEnv !== "test"){
+      this.app.use(morgan("dev"))
+    }
     this.app.use(cors({
       origin: true,
       // ...corsOptions,
