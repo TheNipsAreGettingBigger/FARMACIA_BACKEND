@@ -55,7 +55,7 @@ describe('Test para el modulo de product', () => {
       .set("Authorization", `Bearer ${accessToken}`)
       .send({
         ...product,
-        name : "Producto para acabar y destruir con el asqueroso comunismo"
+        name : "Producto para acabar y destruir con el mal del mundo"
       });
     expect(response.statusCode).toBe(200);
   })
