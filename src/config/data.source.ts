@@ -13,6 +13,7 @@ const Config: DataSourceOptions = {
   username: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
+  // url : 'mysql://root:r0uOgyuFoQ49TqR0DYDE@containers-us-west-158.railway.app:6262/railway',
   entities: [__dirname + "/../**/*.entity{.ts,.js}"],
   migrations: [__dirname + "/../migrations/*{.ts,.js}"],
   synchronize: false,

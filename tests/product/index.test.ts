@@ -28,7 +28,8 @@ beforeAll(async () => {
     "name":"producto #50",
     "stock":50,
     "price":60,
-    "expiration_date":1658627826760,
+    // "expiration_date":1658627826760,
+    "expiration_date":"2022-11-29 22:13:06",
     "therapeutic_description":"Desc #50",
     "laboratory":labID
   }
@@ -46,6 +47,7 @@ describe('Test para el modulo de product', () => {
       .post("/api/products/create")
       .set("Authorization", `Bearer ${accessToken}`)
       .send(product);
+    console.log(response.body)
     expect(response.statusCode).toBe(200);
     productID = response.body.data.id
   })

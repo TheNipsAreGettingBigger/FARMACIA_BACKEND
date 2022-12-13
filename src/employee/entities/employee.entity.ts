@@ -9,7 +9,7 @@ import { RoleType } from "../dtos/employee.dto";
 @Unique(["username","email","dni"])
 export class EmployeeEntity extends BaseUserEntity{
 
-  @Column({ length:500 })
+  @Column({ length:250 })
   username !: string
   
   @Column({ select : false })
