@@ -11,6 +11,7 @@ import { AuthRouter } from './auth/auth.router';
 import { ProductRouter } from './product/product.router';
 import { LaboratoryRouter } from './laboratory/laboratory.router';
 import { PurchaseRouter } from './purchase/purchase.router';
+import { ResumeRouter } from './resume/resume.router';
 
 export class ServerBootstrap extends ConfigServer{
   app :Application
@@ -55,7 +56,8 @@ export class ServerBootstrap extends ConfigServer{
       new AuthRouter().router,
       new ProductRouter().router,
       new LaboratoryRouter().router,
-      new PurchaseRouter().router
+      new PurchaseRouter().router,
+      new ResumeRouter().router,
     ]
   }
   config = () => {
