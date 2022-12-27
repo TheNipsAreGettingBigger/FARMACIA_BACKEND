@@ -32,6 +32,6 @@ export class AuthService extends ConfigServer{
     if(!employeeByEmail && !employeeByUsername) return null
     const employee = employeeByEmail ?? employeeByUsername
     const isMatch = await bcrypt.compare(password,employee!.password as string)
-    return isMatch ? employee : null
+    return !isMatch ? null : employee
   }
 }
