@@ -47,7 +47,7 @@ describe('Test para el modulo de product', () => {
       .post("/api/products/create")
       .set("Authorization", `Bearer ${accessToken}`)
       .send(product);
-    console.log(response.body)
+    // console.log(response.body)
     expect(response.statusCode).toBe(200);
     productID = response.body.data.id
   })
