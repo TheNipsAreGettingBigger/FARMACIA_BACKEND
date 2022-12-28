@@ -27,7 +27,7 @@ export class AuthService extends ConfigServer{
     }
   }
   validateEmployee = async (usernameOrEmail:string,password :string):Promise<EmployeeEntity | null> => {
-    const employeeByEmail = await this.employeeService.findByUsername(usernameOrEmail)
+    const employeeByEmail = await this.employeeService.findByEmail(usernameOrEmail)
     const employeeByUsername = await this.employeeService.findByUsername(usernameOrEmail)
     if(!employeeByEmail && !employeeByUsername) return null
     const employee = employeeByEmail ?? employeeByUsername
